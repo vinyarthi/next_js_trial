@@ -18,7 +18,7 @@ export default async function JobPage({
   // dummy job data for now
   const job = {
     id,
-    imageUrl: "/dog.jpg",
+    imageUrl: `/uploads/${id}.jpg`,
     status: "Not generated yet",
     previews: [],
   }
