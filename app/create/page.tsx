@@ -8,7 +8,10 @@ export default function CreateArt() {
   const [file, setFile] = useState<File | null>(null)
 
   async function handleUpload() {
-    if (!file) return
+    if (!file){
+       alert("Please select a file")
+       return
+    }
 
     const formData = new FormData()
     formData.append("file", file)
