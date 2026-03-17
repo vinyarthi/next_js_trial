@@ -5,19 +5,28 @@ export default async function JobPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ login?: string; paid?: string; userId?: string }>
+  searchParams: Promise<{
+    login?: string
+    paid?: string
+    userId?: string
+    imageUrl?: string
+  }>
 }) {
   const { id } = await params
-  const { login, paid, userId: queryUserId } = await searchParams
+  const {
+    login,
+    paid,
+    userId: queryUserId,
+    imageUrl,
+  } = await searchParams
 
   const isLoggedIn = login === "true"
   const isPaid = paid === "true"
-
   const userId = queryUserId ?? ""
-  // dummy job data for now
+
   const job = {
     id,
-    imageUrl: `/uploads/${id}.jpg`,
+    imageUrl: imageUrl ? imageUrl : `/uploads/${id}.jpg`,
     status: "Not generated yet",
     previews: [],
   }

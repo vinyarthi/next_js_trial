@@ -37,7 +37,9 @@ export default function CreateArt() {
       }
 
       const data = await res.json()
-      router.push(`/job/${data.jobId}`)
+      router.push(
+  `/job/${data.jobId}?imageUrl=${encodeURIComponent(data.imageUrl)}`
+)
     } catch (error) {
       console.error(error)
       alert("Upload failed. Please try again.")
