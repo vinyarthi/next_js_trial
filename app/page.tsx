@@ -1,9 +1,15 @@
-import Link from "next/link";
+import { Hero } from "@/components/Hero";
+import { Features } from "@/components/Features";
+import { Pricing } from "@/components/Pricing";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  return (<div className="flex flex-col items-center justify-center min-h-screen">
-    <h1 className="m-4 text-2xl font-bold">This is welcome screen of Pet Art Creation App</h1>
-    <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="/create">Create Art</Link>
-  </div>
+  return (
+    <main>
+      <Hero />
+      <Features />
+      <Pricing />
+      <Footer />
+    </main>
   );
 }
