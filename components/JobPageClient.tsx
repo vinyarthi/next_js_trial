@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 
 type Job = {
@@ -30,8 +30,21 @@ export default function JobPageClient({
   isPaid,
 }: JobPageClientProps) {
   const [status, setStatus] = useState(job.status)
-  const [previews, setPreviews] = useState(job.previews)
+  const [previews, setPreviews] = useState<string[]>(job.previews)
   const [selectedStyle, setSelectedStyle] = useState<string | null>(null)
+
+  useEffect(() => {
+    const savedPreviews = localStorage.getItem(`job-previews-${job.id}`)
+    const savedStatus = localStorage.getItem(`job-status-${job.id}`)
+
+    if (savedPreviews) {
+      setPreviews(JSON.parse(savedPreviews))
+    }
+
+    if (savedStatus) {
+      setStatus(savedStatus)
+    }
+  }, [job.id])
 
   async function previewImagesHandler() {
     if (!selectedStyle) {
@@ -42,7 +55,6 @@ export default function JobPageClient({
     try {
       setStatus("Generating previews...")
 
-      // 1. Read the already-uploaded image from its URL
       const imageResponse = await fetch(job.imageUrl)
       if (!imageResponse.ok) {
         throw new Error("Failed to fetch uploaded image")
@@ -50,7 +62,6 @@ export default function JobPageClient({
 
       const imageBlob = await imageResponse.blob()
 
-      // 2. Send it to watermark API
       const formData = new FormData()
       formData.append("file", imageBlob, `${job.id}.jpg`)
 
@@ -60,22 +71,19 @@ export default function JobPageClient({
       })
 
       if (!watermarkResponse.ok) {
-        throw new Error("Failed to create watermarked preview")
+        throw new Error("Failed to create preview")
       }
 
-      // 3. Convert returned image into a temporary browser URL
       const watermarkedBlob = await watermarkResponse.blob()
       const previewUrl = URL.createObjectURL(watermarkedBlob)
 
-      // 4. Show preview(s)
-      setPreviews([
-        previewUrl,
-        previewUrl,
-        previewUrl,
-        previewUrl,
-      ])
+      const newPreviews = [previewUrl, previewUrl, previewUrl, previewUrl]
 
+      setPreviews(newPreviews)
       setStatus("Previews generated!")
+
+      localStorage.setItem(`job-previews-${job.id}`, JSON.stringify(newPreviews))
+      localStorage.setItem(`job-status-${job.id}`, "Previews generated!")
     } catch (error) {
       console.error(error)
       setStatus("Failed to generate previews.")
@@ -126,7 +134,6 @@ export default function JobPageClient({
       </div>
 
       <div>Status: {status}</div>
-      <div>Preview results grid</div>
 
       <div className="grid grid-cols-4 gap-4 mb-8">
         {previews.map((preview, index) => (
