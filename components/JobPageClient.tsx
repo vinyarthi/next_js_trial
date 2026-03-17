@@ -149,31 +149,40 @@ export default function JobPageClient({
         ))}
       </div>
 
-      {isLoggedIn ? (
-        isPaid ? (
-          <a
-            href="/downloaded_dog_image.jpg"
-            download="pet-portrait-hd.jpg"
-            className="bg-green-500 text-white px-4 py-2 rounded inline-block"
-          >
-            Download images
-          </a>
-        ) : (
-          <Link
-            href={`/job/${job.id}/payment?login=true`}
-            className="bg-green-500 text-white px-4 py-2 rounded inline-block"
-          >
-            Unlock HD for $5
-          </Link>
-        )
-      ) : (
-        <Link
-          href={`/job/${job.id}?login=true`}
-          className="bg-blue-500 text-white px-4 py-2 rounded inline-block"
-        >
-          Dummy Sign In
-        </Link>
-      )}
+{isLoggedIn ? (
+  <div className="flex gap-4">
+    {isPaid ? (
+      <a
+        href="/downloaded_dog_image.jpg"
+        download="pet-portrait-hd.jpg"
+        className="bg-green-500 text-white px-4 py-2 rounded inline-block"
+      >
+        Download images
+      </a>
+    ) : (
+      <Link
+        href={`/job/${job.id}/payment?login=true`}
+        className="bg-green-500 text-white px-4 py-2 rounded inline-block"
+      >
+        Unlock HD for $5
+      </Link>
+    )}
+
+    <Link
+      href={`/job/${job.id}`}
+      className="bg-red-500 text-white px-4 py-2 rounded inline-block"
+    >
+      Dummy Sign Out
+    </Link>
+  </div>
+) : (
+  <Link
+    href={`/job/${job.id}?login=true`}
+    className="bg-blue-500 text-white px-4 py-2 rounded inline-block"
+  >
+    Dummy Sign In
+  </Link>
+)}
     </div>
   )
 }
