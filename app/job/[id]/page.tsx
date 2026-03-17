@@ -1,20 +1,19 @@
 import JobPageClient from "@/components/JobPageClient"
 
-
 export default async function JobPage({
-    params,
-    searchParams,
+  params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>
-  searchParams: Promise<{ login?: string, paid?: string }>
-}){
+  searchParams: Promise<{ login?: string; paid?: string; userId?: string }>
+}) {
   const { id } = await params
-  const { login, paid } = await searchParams
+  const { login, paid, userId: queryUserId } = await searchParams
 
   const isLoggedIn = login === "true"
-  const isPaid = paid === 'true'
+  const isPaid = paid === "true"
 
-
+  const userId = queryUserId ?? ""
   // dummy job data for now
   const job = {
     id,
@@ -28,6 +27,7 @@ export default async function JobPage({
       job={job}
       isLoggedIn={isLoggedIn}
       isPaid={isPaid}
+      userId={userId}
     />
   )
 }
