@@ -1,0 +1,19 @@
+*   [33m85a1207[m[33m ([m[1;35mrefs/stash[m[33m)[m WIP on bd39e7e: bd39e7e Added styles files from ai_studio
+[31m|[m[32m\[m  
+[31m|[m * [33m92881c7[m index on bd39e7e: bd39e7e Added styles files from ai_studio
+[31m|[m[31m/[m  
+* [33mbd39e7e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mai_studio_ui[m[33m)[m Added styles files from ai_studio
+* [33m0b7e9cf[m[33m ([m[1;31morigin/ai_studio_ui[m[33m)[m have updated all other pages as well to the same aethetic
+* [33mf000ca3[m Uploaded image is present in jobs page
+* [33m30f8f1e[m Awesome Visuals taken from ai studio petpawprix project in build folder
+* [33m0a04de9[m[33m ([m[1;32mmain[m[33m)[m Library is having user IDs image after sign in. which was not the case rpeviously
+* [33m68a407a[m[33m ([m[1;31morigin/main[m[33m)[m Library is tied to user id
+* [33m863b3db[m Added dummy signout
+* [33mcb30f44[m Finished storing after making a payment.
+* [33mc24f40a[m Finished adding watermark
+* [33mb9e60e8[m Previews are now generated with the same input image.
+* [33m0da6b1d[m Upload to server is now complete.
+* [33mde31f71[m Completed the download functionality.
+* [33m0bb7db7[m Included list of things in job page
+* [33meb17eae[m Job/ID page is created
+* [33m155b161[m Initial commit from Create Next App
